@@ -1,0 +1,18 @@
+{% load static %}
+<div class="col s12 m6 l3">
+    <div class="card medium">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{product.image.url}}" alt="{{product.name}}">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 truncate">{{product.name}}<i class="material-icons right">more_vert</i></span>
+            <p>&#8358; {{product.price}}</p>
+            <hr>
+            <p><a href="{{ product.get_absolute_url }}">Details</a></p>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{product.name}}<i class="material-icons right">close</i></span>
+            <p>{{product.description}}</p>
+        </div>
+    </div>
+</div>

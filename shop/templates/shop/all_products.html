@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block metadescription %}
+    {% if category %}
+        {{category.descriprtion|truncatewords:155}}
+    {% else %}
+        Welcome to dinki, were you can get all your cool Nigeria outfits without hassel
+    {% endif %}
+{% endblock metadescription %}
+
+{% block title %} 
+    {% if category %}
+        {{category.name}}
+    {% else %}
+        See our perfect collection
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+    {% comment %} Slider {% endcomment %}
+    {% if category %}
+        <div>
+        {% include 'shop/includes/_category_slider.html' %}
+        </div>
+    {% else %}
+        {% include 'shop/includes/_all_product_slider.html' %}
+    {% endif %}
+
+    <div class="container">
+    {% comment %} Breadcrumbs bellow {% endcomment %}
+    {% if category %}
+        <div>
+            <div>
+                <p><a href="{% url 'shop:all_product_cat' %}">Our product collection</a>  | {{ category.name }} </p> 
+            </div>
+        </div>
+    {% endif %}
+    
+        <div class="row">
+            {% for product in products %}
+                {% include 'shop/includes/_item_card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock content %}

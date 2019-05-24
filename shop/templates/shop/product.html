@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    {{product.descriprtion|truncatewords:155}}
+{% endblock metadescription %}
+
+{% block title %} 
+    {{product.name}}
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div>
+            <div>
+                <p>
+                    <a href="{% url 'shop:all_product_cat' %}">All products</a>  | 
+                    <a href="{{ product.category.get_absolute_url }}">
+                        {{product.category}}
+                    </a> |
+                    {{ product.name }}
+                </p> 
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="grid-example col s12 m6">
+                <span class="flow-text">
+                    <img class="materialboxed responsive-img" width="650" src="{{product.image.url}}">
+                </span>
+            </div>
+
+            <div class="grid-example col s12 m6">
+                <span class="flow-text">
+                    <div class="row">
+                        <div class="grid-example col s12">
+                            <span class="flow-text">
+                                <h4>{{product.name}}</h4>
+                            </span>
+                        </div>
+                        <div class="grid-example col s12">
+                            <span class="flow-text">
+                                <h5>&#8358; {{product.price}}</h5>
+                            </span>
+                        </div>
+                        {% if product.stock <= 0 %}
+                            <div class="grid-example col s12">
+                                <span class="flow-text">Currently out of stock</span>
+                                <h6><a href="#">contact seller</a></h6>
+                            </div>
+                        {% else %}
+                            <div class="grid-example col s12">
+                                <span class="flow-text">Stock - {{product.stock}}</span>
+                            </div>
+                        {% endif %}
+                        <div class="grid-example col s12"><br></div>
+                        
+                        <div class="grid-example col s12">
+                            <a href="http://" class="btn green" style="width: 100%;">Add to cart</a>
+                        </div>
+                        <div class="grid-example col s12">
+                            <a href="http://" class="btn red" style="width: 100%; margin-top: 3%">Buy now</a>
+                        </div>
+                        {% comment %} collapsible menu {% endcomment %}
+                        <div class="grid-example col s12">
+                        <br>
+                        <hr>
+                        <div class="grid-example col s12">
+                            <span class="flow-text">{{product.description}}</span>
+                        </div>
+                        <div class="grid-example col s12">
+                            {% include "shop/includes/_collapsable_menu.html" %}
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} Similar items {% endcomment %}
+<div class="container">
+    <h5>Similar items</h5>
+    <hr>
+        <div class="row">
+            {% include 'shop/includes/_item_card.html' %}
+            {% include 'shop/includes/_item_card.html' %}
+            {% include 'shop/includes/_item_card.html' %}
+            {% include 'shop/includes/_item_card.html' %}
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block custom_js %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.materialboxed');
+            var instances = M.Materialbox.init(elems, {});
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems, {});
+        });
+    </script>
+{% endblock custom_js %}

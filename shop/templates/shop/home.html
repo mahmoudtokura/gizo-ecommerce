@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'shop/includes/_slider.html' %}
+    <div class="container">
+    <hr>
+    <h3>Featured Items</h3>
+        <div class="row">
+        {% for product in products %}
+            {% include 'shop/includes/_item_card.html' %}
+        {% endfor %}
+        </div>
+    <hr>
+    <h3>On sale !!!</h3>
+        <div class="row">
+            <div class="col s12 m6 l3">
+                {% include 'shop/includes/_item_card.html' %}
+            </div>
+            <div class="col s12 m6 l3">{% include 'shop/includes/_item_card.html' %}</div>
+            <div class="col s12 m6 l3">{% include 'shop/includes/_item_card.html' %}</div>
+            <div class="col s12 m6 l3">{% include 'shop/includes/_item_card.html' %}</div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block custom_js %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems, {});
+    });
+    </script>
+{% endblock custom_js %}

@@ -1,0 +1,50 @@
+<nav class="red">
+    <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">dinki</a>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'shop:all_product_cat' %}">All products</a></li>
+        <!-- Dropdown Trigger -->
+        <li><a class='dropdown-trigger' href='#' data-target='dropdown1'>Categories</a></li>
+        
+        <li><a href="collapsible.html">Javascript</a></li>
+        <li><a href="mobile.html">Your Cart()</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="images/office.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+      <a href="#name"><span class="red-text name">John Doe</span></a>
+      <a href="#email"><span class="red-text email">jdandturk@gmail.com</span></a>
+    </div></li>
+    <li><a href="#!"><i class="material-icons red-text">cloud</i>First Link With Icon</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+  
+
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    {% for category in categories %}
+      <li><a href="{{category.get_absolute_url}}" constrainWidth="false"class="red-text">{{category.name}}</a></li>
+    {% endfor %}    
+  </ul>
+
+  <style>
+  ul.select-dropdown,
+  ul.dropdown-content {
+    width: auto !important;
+
+    li > span {
+      white-space: nowrap;
+    }
+  }
+  </style>

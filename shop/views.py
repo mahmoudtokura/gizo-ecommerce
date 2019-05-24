@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -13,14 +14,19 @@ def home(request):
 
 def all_product_cat(request, c_slug=None):
     c_page = None
-    products = None
+    products_list = None
 
     if c_slug != None:
         c_page = get_object_or_404(Category, slug=c_slug)
-        products = Product.objects.filter(category=c_page, available=True)
+        products_list = Product.objects.filter(category=c_page, available=True)
 
     else:
-        products = Product.objects.all().filter(available=True)
+        products_list = Product.objects.all().filter(available=True)
+
+    paginator = Paginator(products_list, 10)  # Show 10 contacts per page
+
+    page = request.GET.get("page")
+    products = paginator.get_page(page)
 
     context = {"category": c_page, "products": products, "categories": all_categories()}
     return render(request, "shop/all_products.html", context)

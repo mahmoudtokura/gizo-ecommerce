@@ -1,44 +1,30 @@
 {% extends 'base.html' %}
 
 {% block metadescription %}
-    {% if category %}
-        {{category.descriprtion|truncatewords:155}}
-    {% else %}
-        Welcome to dinki, were you can get all your cool Nigeria outfits without hassel
-    {% endif %}
+    Welcome to dinki, were you can get all your cool Nigeria outfits without hassel
 {% endblock metadescription %}
 
 {% block title %} 
-    {% if category %}
-        {{category.name}}
-    {% else %}
-        See our perfect collection
-    {% endif %}
+    {{ query }}
 {% endblock title %}
 
 {% block content %}
     {% comment %} Slider {% endcomment %}
-    {% if category %}
-        <div>
-        {% include 'shop/includes/_category_slider.html' %}
-        </div>
-    {% else %}
-        {% include 'shop/includes/_all_product_slider.html' %}
-    {% endif %}
+    {% include 'shop/includes/_all_product_slider.html' %}
 
     <div class="container">
-    {% comment %} Breadcrumbs bellow {% endcomment %}
-    {% if category %}
-        <div>
-            <div>
-                <p><a href="{% url 'shop:all_product_cat' %}">Our product collection</a>  | {{ category.name }} </p> 
-            </div>
-        </div>
-    {% endif %}
-    
+        
+        <h4>Search results for {{query}}</h4>
+
+    {% comment %} Breadcrumbs bellow {% endcomment %}   
         <div class="row">
             {% for product in products %}
                 {% include 'shop/includes/_item_card.html' %}
+            {% empty %}
+                <div class="center">
+                    <h4>0 results found.</h4>
+                    <p><a href="">See out other products</a></p>
+                </div>
             {% endfor %}
         </div>
     </div>

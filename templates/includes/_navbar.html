@@ -3,15 +3,23 @@
         <a href="/" class="brand-logo">dinki</a>
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'shop:all_product_cat' %}">All products</a></li>
-        <!-- Dropdown Trigger -->
-        <li><a class='dropdown-trigger' href='#' data-target='dropdown1'>Categories</a></li>
-        
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Your Cart()</a></li>
+          <li><a href="{% url 'shop:all_product_cat' %}">All products</a></li>
+          <!-- Dropdown Trigger -->
+          <li><a class='dropdown-trigger' href='#' data-target='dropdown1'>Categories</a></li>
+          
+          <li>
+            <span class="badge white-text">4</span>
+            <a href="mobile.html">
+              <i class="material-icons">shopping_cart</i>
+            </a>
+          </li>
         </ul>
     </div>
 </nav>
+        
+
+{% comment %} Search form {% endcomment %}
+{% include 'includes/search_form.html' %}
 
 <ul id="slide-out" class="sidenav">
     <li><div class="user-view">
@@ -31,7 +39,7 @@
   
 
 
-  <!-- Dropdown Structure -->
+  <!-- Category Dropdown Structure -->
   <ul id='dropdown1' class='dropdown-content'>
     {% for category in categories %}
       <li><a href="{{category.get_absolute_url}}" constrainWidth="false"class="red-text">{{category.name}}</a></li>

@@ -1,0 +1,21 @@
+<nav class="white center">
+  <div class="nav-wrapper container">
+      <form action="{% url 'search_app:search_result' %}" method="GET">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col s12">
+            <div class="row">
+              <div class="input-field col s8">
+                <input class="" type="text" name="q">
+              </div>
+              <div class="s10 offset-s1 center-align">
+                  <button class="btn waves-effect waves-light red" type="submit">
+                      Search
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+</nav>

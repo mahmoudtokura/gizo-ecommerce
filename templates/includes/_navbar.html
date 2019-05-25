@@ -7,12 +7,14 @@
           <!-- Dropdown Trigger -->
           <li><a class='dropdown-trigger' href='#' data-target='dropdown1'>Categories</a></li>
           
-          <li>
-            <span class="badge white-text">4</span>
-            <a href="mobile.html">
-              <i class="material-icons">shopping_cart</i>
-            </a>
-          </li>
+          {% if item_count > 0 %}
+            <li>
+              <span class="badge white-text">{{item_count}}</span>
+              <a href="{% url 'cart:cart_detail' %}">
+                <i class="material-icons">shopping_cart </i>
+              </a>
+            </li>
+          {% endif %}
         </ul>
     </div>
 </nav>

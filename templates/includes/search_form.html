@@ -1,7 +1,7 @@
 <nav class="white center">
   <div class="nav-wrapper container">
       <form action="{% url 'search_app:search_result' %}" method="GET">
-        {% csrf_token %}
+        {% comment %} {% csrf_token %} {% endcomment %}
         <div class="row">
           <div class="col s12">
             <div class="row">

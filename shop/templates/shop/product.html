@@ -50,16 +50,17 @@
                             </div>
                         {% else %}
                             <div class="grid-example col s12">
-                                <span class="flow-text">Stock - {{product.stock}}</span>
+                                <span class="flow-text">Stock {{product.stock}}</span>
                             </div>
                         {% endif %}
                         <div class="grid-example col s12"><br></div>
                         
                         <div class="grid-example col s12">
-                            <a href="http://" class="btn green" style="width: 100%;">Add to cart</a>
-                        </div>
-                        <div class="grid-example col s12">
-                            <a href="http://" class="btn red" style="width: 100%; margin-top: 3%">Buy now</a>
+                            {% if product.stock > 0 %}
+                                <a href="{% url 'cart:add_to_cart' product_id=product.id%}" class="btn green" style="width: 100%;">Add to cart</a>
+                            {% else %}
+                                <button class="btn green" style="width: 100%;" disabled="disabled">Out of stock</button>
+                            {% endif %}
                         </div>
                         {% comment %} collapsible menu {% endcomment %}
                         <div class="grid-example col s12">

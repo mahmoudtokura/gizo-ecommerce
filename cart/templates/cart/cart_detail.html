@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    dinki cart
+{% endblock metadescription %}
+
+{% block title %} 
+    cart
+{% endblock title %}
+
+{% block content %}
+     <div class="container">
+        {% if cart_items %}
+            <h3 class="center title">Your shopping cart</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">+ / -</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>
+                                <img class="responsive-img" style="width: 100px" src="{{item.product.image.url}}" alt="item.product.name">
+                                <p style="margin-bottom: -10px;">{{item.product.name}}</p>
+                                <p style="margin-bottom: -5px;">Qty: {{item.quantity}}</p>
+                            </td>
+                            <td>&#8358; {{item.product.price}}</td>
+                            <td>&#8358; {{item.sub_total}}</td>
+                            <td>
+                                {% if item.product.stock > 0 %}
+                                    <a href="{% url 'cart:add_to_cart' product_id=item.product.id %}">
+                                        <i class="material-icons green-text">add</i>
+                                    </a>
+                                {% else %}
+                                    <a>
+                                        <i class="material-icons green-text">add</i>
+                                    </a>
+                                {% endif %}
+
+                                <a href="{% url 'cart:remove_from_cart' product_id=item.product.id %}">
+                                    <i class="material-icons orange-text">remove</i>
+                                </a>
+                                
+                                <a href="{% url 'cart:delete_from_cart' product_id=item.product.id %}">
+                                    <i class="material-icons red-text">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <p>Your total is: &#8358; <strong>{{cart_total}}</strong></p>
+            <div class="center">
+                <a class="waves-effect waves-light btn blue" style="width: 100%; margin-bottom: 5px;">Continue shopping</a>
+                <a class="waves-effect waves-light btn green" style="width: 100%;">Pay &#8358; {{cart_total}} with card</a>
+            </div>
+            <br>
+        {% else %}
+            <div class="center">
+                <h3>Your cart is empty</h3>
+                <p>Please click <a href="{% url 'shop:all_product_cat' %}">here</a> to continue shopping</p>
+            </div>
+        {% endif %}
+     </div>
+{% endblock content %}
+
+{% block custom_js %}
+    
+{% endblock custom_js %}
